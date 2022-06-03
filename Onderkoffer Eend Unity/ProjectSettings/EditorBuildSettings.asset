@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/ConnectToServer.unity
+    guid: 89bf366d1549e5a489d8a718781fcbb3
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer/Lobby.unity
+    guid: a426fffb22659cd40b4c480b1680c3f1
+  - enabled: 1
+    path: Assets/Scenes/Ivar Scene/IvarScene.unity
+    guid: 85cf6ce6047717b4c9d5596ee77d5b50
   m_configObjects: {}
