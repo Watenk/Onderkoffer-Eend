@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour
     public float speed;
 
     Rigidbody rb;
-    public PhotonView view;
+    PhotonView view;
     Camera cam;
 
     void Start()

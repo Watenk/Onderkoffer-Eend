@@ -44,6 +44,13 @@ MonoBehaviour:
   - removePlayer1Button
   - removePlayer2Button
   - removePlayer3Button
+  - Player1
+  - Player2
+  - Player3
+  - AssignHost
+  - AssignPlayer1
+  - AssignPlayer2
+  - LoadMainScene
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

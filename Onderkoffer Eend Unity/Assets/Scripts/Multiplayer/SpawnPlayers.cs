@@ -5,33 +5,23 @@ using Photon.Pun;
 
 public class SpawnPlayers : MonoBehaviour
 {
-    //References
-    private RoomManager roomManager;
-
     public GameObject LiftPlayerPrefab;
     public GameObject PlayerPrefab;
+    public GameObject LiftLight;
 
     public Vector3 LiftPlayerSpawn = new(500, 125 ,190);
-    public Vector3 PlayerSpawn = new (400, 0, 300);
+    public Vector3 PlayerSpawn = new(400, 0, 300);
 
     private void Start()
     {
-        //References
-        roomManager = FindObjectOfType<RoomManager>();
-
-        if (roomManager.player1 == true)
+        if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.Instantiate(LiftPlayerPrefab.name, LiftPlayerSpawn, Quaternion.identity);
+            LiftLight.SetActive(true);
         }
-
-        if (roomManager.player2 == true)
+        else
         {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, PlayerSpawn, Quaternion.identity);
-        }
-
-        if (roomManager.player3 == true)
-        {
-            PhotonNetwork.Instantiate(PlayerPrefab.name, PlayerSpawn, Quaternion.identity);
+        PhotonNetwork.Instantiate(PlayerPrefab.name, PlayerSpawn, Quaternion.identity);
         }
     }
 }
