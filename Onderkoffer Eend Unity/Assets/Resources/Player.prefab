@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  view: {fileID: 0}
 --- !u!136 &618859646743272063
 CapsuleCollider:
   m_ObjectHideFlags: 0

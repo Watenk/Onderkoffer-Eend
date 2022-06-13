@@ -6,7 +6,7 @@ public class CabinController : MonoBehaviour
 {
     //References
     private FindCabin cabin;
-    private PlayerScript player;
+    private FindSkiPlayer player;
 
     public float cabinSpeed;
 
@@ -14,16 +14,16 @@ public class CabinController : MonoBehaviour
     {
         //References
         cabin = FindObjectOfType<FindCabin>();
-        player = FindObjectOfType<PlayerScript>();
+        player = FindObjectOfType<FindSkiPlayer>();
     }
 
-    public void goUp()
+    public void GoUp()
     {
         cabin.transform.position = new Vector3(cabin.transform.position.x , cabin.transform.position.y, cabin.transform.position.z + (cabinSpeed * Time.deltaTime));
         player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z + (cabinSpeed * Time.deltaTime));
     }
 
-    public void goDown()
+    public void GoDown()
     {
         cabin.transform.position = new Vector3(cabin.transform.position.x, cabin.transform.position.y, cabin.transform.position.z - (cabinSpeed * Time.deltaTime));
         player.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z - (cabinSpeed * Time.deltaTime));

@@ -23,6 +23,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        {
+            Camera.main.fieldOfView--;
+        }
+
+        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        {
+            Camera.main.fieldOfView++;
+        }
+    }
+
     void FixedUpdate()
     {
         if (view.IsMine && rb.velocity.magnitude <= speed)
