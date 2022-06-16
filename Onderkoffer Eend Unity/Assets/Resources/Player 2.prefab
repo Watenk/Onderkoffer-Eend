@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3228875948427739804}
-  - component: {fileID: -2970307560857318007}
+  - component: {fileID: 6366598591727809215}
   - component: {fileID: 618859646743272063}
   - component: {fileID: 129265010241613892}
   - component: {fileID: 8401485458577565269}
   - component: {fileID: -8401557491923762781}
-  - component: {fileID: 4054510928787784595}
   m_Layer: 0
   m_Name: Player 2
   m_TagString: Untagged
@@ -40,7 +39,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2970307560857318007
+--- !u!114 &6366598591727809215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,7 +48,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3228875948427739794}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16bb22e4576dda40a9d69b468de2de3, type: 3}
+  m_Script: {fileID: 11500000, guid: 063f40147ab3df144bad493d1593f771, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
@@ -139,18 +138,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &4054510928787784595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3228875948427739794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8772f2b1e0442474696ff6a7e7cbc3c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4111850233300078467
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +308,7 @@ GameObject:
   - component: {fileID: 5165455612995349603}
   - component: {fileID: 3133080200887095713}
   m_Layer: 0
-  m_Name: Point Light
+  m_Name: PointLight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

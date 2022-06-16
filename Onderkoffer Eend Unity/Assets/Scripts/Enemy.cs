@@ -7,44 +7,40 @@ using Photon.Pun;
 public class Enemy : MonoBehaviour
 {
     //Switch
-    public enum State { Patrol, Follow, Attack }
+    public enum State { Patrol, Follow, Kill }
     public State state;
 
     //Agent
-    public float ViewDistance = 10f;
-    public Transform[] Points;
+    public float viewDistance = 50f;
+    private readonly float killDistance = 2f;
+    private Transform[] Points = new Transform[9];
    
     private int Point = 0;
     private NavMeshAgent Agent;
-
-    private PlayerScript Player;
-    private GameManager gameManager;
-    private SpawnPlayers spawnPlayers;
+    private FindRoute1 route1;
 
     //Players
     GameObject closestPlayer;
     GameObject player1;
     GameObject player2;
-    bool assignedPlayers = false;
+    float DistancePlayer1;
+    float DistancePlayer2;
 
     void Start()
     {
-        spawnPlayers = FindObjectOfType<SpawnPlayers>();
-        Player = FindObjectOfType<PlayerScript>();
-        gameManager = FindObjectOfType<GameManager>();
         Agent = GetComponent<NavMeshAgent>();
-        Agent.destination = Points[Point].position;
+        player1 = FindObjectOfType<Player1Script>().gameObject;
+        player2 = FindObjectOfType<Player2Script>().gameObject;
+        route1 = FindObjectOfType<FindRoute1>();
+
+        for (int i = 0; i < Points.Length; i++)
+        {
+            Points[i] = route1.transform.GetChild(i);
+        }
     }
 
     void Update()
     {
-        if (spawnPlayers.allPlayersSpawned == true && assignedPlayers == false)
-        {
-            player1 = FindObjectOfType<FindPlayer1>().gameObject;
-            player2 = FindObjectOfType<FindPlayer2>().gameObject;
-            assignedPlayers = true;
-        }
-
         switch (state)
         {
             case State.Patrol:
@@ -55,15 +51,15 @@ public class Enemy : MonoBehaviour
                 Follow();
                 break;
 
-            case State.Attack:
-                //Attack();
+            case State.Kill:
+                Kill();
                 break;
         }
 
         //Update PlayerLocations
 
-        float DistancePlayer1 = Vector3.Distance(transform.position, player1.transform.position);
-        float DistancePlayer2 = Vector3.Distance(transform.position, player2.transform.position);
+        DistancePlayer1 = Vector3.Distance(transform.position, player1.transform.position);
+        DistancePlayer2 = Vector3.Distance(transform.position, player2.transform.position);
 
         if (DistancePlayer1 < DistancePlayer2)
         {
@@ -75,14 +71,22 @@ public class Enemy : MonoBehaviour
             closestPlayer = player2;
         }
 
-        if (Vector3.Distance(transform.position, closestPlayer.transform.position) < ViewDistance)
+        //Patrol Or Follow
+
+        if (Vector3.Distance(transform.position, closestPlayer.transform.position) < viewDistance)
         {
             state = State.Follow;
         }
 
-        if (Vector3.Distance(transform.position, closestPlayer.transform.position) > ViewDistance)
+        if (Vector3.Distance(transform.position, closestPlayer.transform.position) > viewDistance)
         {
             state = State.Patrol;
+        }
+
+        //Kill
+        if (Vector3.Distance(transform.position, closestPlayer.transform.position) < killDistance)
+        {
+            state = State.Kill;
         }
     }
 
@@ -108,5 +112,10 @@ public class Enemy : MonoBehaviour
         //Follows player in viewdistance
 
         Agent.destination = closestPlayer.transform.position;
+    }
+
+    void Kill()
+    {
+        closestPlayer.transform.position = new Vector3(2, 0, 2);
     }
 }
