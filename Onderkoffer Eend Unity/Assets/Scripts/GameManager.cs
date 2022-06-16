@@ -5,8 +5,5 @@ using Photon.Pun;
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
-    {
-
-    }
+    public bool[] playerArray = new bool[3];
 }

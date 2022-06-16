@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4911180567018728390}
   - component: {fileID: 1885055647204665257}
   - component: {fileID: 6489697489161264204}
+  - component: {fileID: 3040594978964179453}
   m_Layer: 0
   m_Name: SkiPlayer
   m_TagString: Untagged
@@ -199,6 +200,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e0340b35b6bc984194d6bf2545e4de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3040594978964179453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4911180567018728397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70c704e04003d14683801b9a8ad2e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4911180567030633884
