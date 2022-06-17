@@ -105,7 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  viewDistance: 50
+  player1ViewDistance: 50
+  player2ViewDistance: 50
 --- !u!114 &7973759218780186410
 MonoBehaviour:
   m_ObjectHideFlags: 0

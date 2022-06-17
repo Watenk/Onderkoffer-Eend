@@ -8,11 +8,14 @@ public class Player2Script : MonoBehaviour
     public float speed;
 
     private bool zaklampGedimt = false;
+    private bool enemyFound = false;
 
     Rigidbody rb;
     PhotonView view;
     Camera cam;
     Light zaklamp;
+    Enemy enemy;
+    GameManager gameManager;
 
     void Start()
     {
@@ -20,8 +23,7 @@ public class Player2Script : MonoBehaviour
         view = GetComponent<PhotonView>();
         cam = transform.GetChild(0).GetComponent<Camera>();
         zaklamp = gameObject.transform.GetChild(2).GetComponent<Light>();
-
-        print(zaklamp);
+        gameManager = FindObjectOfType<GameManager>();
 
         if (view.IsMine)
         {
@@ -31,16 +33,24 @@ public class Player2Script : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.loadingDone == true && enemyFound == false)
+        {
+            enemy = FindObjectOfType<Enemy>();
+            enemyFound = true;
+        }
+
         if (Input.GetKeyDown("f"))
         {
             if (zaklampGedimt == false)
             {
                 zaklamp.intensity = 10;
+                enemy.player2ViewDistance = 30f;
                 zaklampGedimt = true;
             }
             else
             {
                 zaklamp.intensity = 40;
+                enemy.player2ViewDistance = 30f;
                 zaklampGedimt = false;
             }
         }

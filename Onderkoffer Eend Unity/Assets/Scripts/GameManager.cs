@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     private SpawnPlayers spawnPlayers;
 
     private bool allPlayersSpawned = false;
-    private bool loadingDone = false;
+    public bool loadingDone = false;
 
     private void Start()
     {
@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
             }
             cabinController.SetActive(true);
             loadingScreen.SetActive(false);
-            loadingDone = true;
         }
     }
 }
