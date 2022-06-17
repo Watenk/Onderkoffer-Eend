@@ -11,13 +11,15 @@ public class Enemy : MonoBehaviour
     public State state;
 
     //Agent
-    public float viewDistance = 50f;
+    public float player1ViewDistance = 50f;
+    public float player2ViewDistance = 50f;
     private readonly float killDistance = 2f;
     private Transform[] Points = new Transform[9];
    
     private int Point = 0;
     private NavMeshAgent Agent;
     private FindRoute1 route1;
+    private GameManager gameManager;
 
     //Players
     GameObject closestPlayer;
@@ -25,6 +27,7 @@ public class Enemy : MonoBehaviour
     GameObject player2;
     float DistancePlayer1;
     float DistancePlayer2;
+    float closestPlayerDistance;
 
     void Start()
     {
@@ -32,11 +35,13 @@ public class Enemy : MonoBehaviour
         player1 = FindObjectOfType<Player1Script>().gameObject;
         player2 = FindObjectOfType<Player2Script>().gameObject;
         route1 = FindObjectOfType<FindRoute1>();
+        gameManager = FindObjectOfType<GameManager>();
 
         for (int i = 0; i < Points.Length; i++)
         {
             Points[i] = route1.transform.GetChild(i);
         }
+        gameManager.loadingDone = true;
     }
 
     void Update()
@@ -57,7 +62,6 @@ public class Enemy : MonoBehaviour
         }
 
         //Update PlayerLocations
-
         DistancePlayer1 = Vector3.Distance(transform.position, player1.transform.position);
         DistancePlayer2 = Vector3.Distance(transform.position, player2.transform.position);
 
@@ -71,22 +75,26 @@ public class Enemy : MonoBehaviour
             closestPlayer = player2;
         }
 
-        //Patrol Or Follow
+        closestPlayerDistance = Vector3.Distance(transform.position, closestPlayer.transform.position);
 
-        if (Vector3.Distance(transform.position, closestPlayer.transform.position) < viewDistance)
-        {
-            state = State.Follow;
-        }
 
-        if (Vector3.Distance(transform.position, closestPlayer.transform.position) > viewDistance)
+        //Patrol, Follow or Kill
+        if (closestPlayerDistance > player1ViewDistance || closestPlayerDistance > player2ViewDistance)
         {
             state = State.Patrol;
+            print("Patrol");
         }
 
-        //Kill
+        if (closestPlayerDistance < player1ViewDistance || closestPlayerDistance < player2ViewDistance)
+        {
+            state = State.Follow;
+            print("Follow");
+        }
+
         if (Vector3.Distance(transform.position, closestPlayer.transform.position) < killDistance)
         {
             state = State.Kill;
+            print("Kill");
         }
     }
 
@@ -110,7 +118,6 @@ public class Enemy : MonoBehaviour
     void Follow()
     {
         //Follows player in viewdistance
-
         Agent.destination = closestPlayer.transform.position;
     }
 
