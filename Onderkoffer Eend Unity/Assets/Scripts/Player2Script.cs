@@ -10,12 +10,13 @@ public class Player2Script : MonoBehaviour
     private bool zaklampGedimt = false;
     private bool enemyFound = false;
 
-    Rigidbody rb;
-    PhotonView view;
-    Camera cam;
-    Light zaklamp;
-    Enemy enemy;
-    GameManager gameManager;
+    private Rigidbody rb;
+    private PhotonView view;
+    private Camera cam;
+    private Light zaklamp;
+    private Enemy enemy;
+    private GameManager gameManager;
+    private TerrainDetector terrainDetector;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class Player2Script : MonoBehaviour
         cam = transform.GetChild(0).GetComponent<Camera>();
         zaklamp = gameObject.transform.GetChild(2).GetComponent<Light>();
         gameManager = FindObjectOfType<GameManager>();
+        terrainDetector = new TerrainDetector();
 
         if (view.IsMine)
         {
@@ -33,12 +35,14 @@ public class Player2Script : MonoBehaviour
 
     private void Update()
     {
+        //Find Enemy
         if (gameManager.loadingDone == true && enemyFound == false)
         {
             enemy = FindObjectOfType<Enemy>();
             enemyFound = true;
         }
 
+        //FlashLight
         if (Input.GetKeyDown("f"))
         {
             if (zaklampGedimt == false)
@@ -53,6 +57,20 @@ public class Player2Script : MonoBehaviour
                 enemy.player2ViewDistance = 30f;
                 zaklampGedimt = false;
             }
+        }
+
+        //Terrain
+        int terrain = terrainDetector.GetTerrainTexture(transform.position);
+
+        switch (terrain)
+        {
+            case 0: //Gravel
+                speed = 15;
+                break;
+
+            case 1: //Grass
+                speed = 10;
+                break;
         }
     }
 
