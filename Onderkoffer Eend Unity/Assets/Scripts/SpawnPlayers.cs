@@ -9,7 +9,6 @@ public class SpawnPlayers : MonoBehaviour
     public GameObject player1Prefab;
     public GameObject player2Prefab;
     public GameObject liftLight;
-    public GameObject goggles;
 
     public Vector3 player0Spawn = new(500, 125 ,190);
     public Vector3 player1Spawn = new(400, 0, 300);
@@ -29,7 +28,6 @@ public class SpawnPlayers : MonoBehaviour
         {
             PhotonNetwork.Instantiate(player0Prefab.name, player0Spawn, Quaternion.identity);
             liftLight.SetActive(true);
-            goggles.SetActive(true);
             spawnedPlayerLocal = true;
             gameManager.localPlayerNumber = 0;
             view.RPC("PlayerSpawned", RpcTarget.All, 0);

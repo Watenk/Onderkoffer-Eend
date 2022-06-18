@@ -37,6 +37,10 @@ public class GameManager : MonoBehaviour
                 spawnEnemys.SetActive(true);
             }
             cabinController.SetActive(true);
+        }
+
+        if (loadingDone == true)
+        {
             loadingScreen.SetActive(false);
         }
     }

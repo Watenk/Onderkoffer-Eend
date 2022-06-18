@@ -82,19 +82,16 @@ public class Enemy : MonoBehaviour
         if (closestPlayerDistance > player1ViewDistance || closestPlayerDistance > player2ViewDistance)
         {
             state = State.Patrol;
-            print("Patrol");
         }
 
         if (closestPlayerDistance < player1ViewDistance || closestPlayerDistance < player2ViewDistance)
         {
             state = State.Follow;
-            print("Follow");
         }
 
         if (Vector3.Distance(transform.position, closestPlayer.transform.position) < killDistance)
         {
             state = State.Kill;
-            print("Kill");
         }
     }
 
