@@ -31,12 +31,18 @@ public class Player0Script : MonoBehaviour
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0)
         {
-            Camera.main.fieldOfView--;
+            if (Camera.main.fieldOfView >= 20)
+            {
+                Camera.main.fieldOfView--;
+            }
         }
 
         if (Input.GetAxis("Mouse ScrollWheel") < 0)
         {
-            Camera.main.fieldOfView++;
+            if (Camera.main.fieldOfView <= 100)
+            {
+                Camera.main.fieldOfView++;
+            }
         }
     }
 

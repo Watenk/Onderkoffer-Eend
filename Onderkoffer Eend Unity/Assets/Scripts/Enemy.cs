@@ -6,6 +6,8 @@ using Photon.Pun;
 
 public class Enemy : MonoBehaviour
 {
+    public int enemyNumber = 0;
+
     //Switch
     public enum State { Patrol, Follow, Kill }
     public State state;
@@ -13,12 +15,13 @@ public class Enemy : MonoBehaviour
     //Agent
     public float player1ViewDistance = 50f;
     public float player2ViewDistance = 50f;
-    private readonly float killDistance = 2f;
+    private readonly float killDistance = 5f;
     private Transform[] Points = new Transform[9];
-   
+
     private int Point = 0;
     private NavMeshAgent Agent;
     private FindRoute1 route1;
+    private FindRoute2 route2;
     private GameManager gameManager;
 
     //Players
@@ -35,13 +38,26 @@ public class Enemy : MonoBehaviour
         player1 = FindObjectOfType<Player1Script>().gameObject;
         player2 = FindObjectOfType<Player2Script>().gameObject;
         route1 = FindObjectOfType<FindRoute1>();
+        route2 = FindObjectOfType<FindRoute2>();
         gameManager = FindObjectOfType<GameManager>();
 
-        for (int i = 0; i < Points.Length; i++)
+        if (enemyNumber == 1)
         {
-            Points[i] = route1.transform.GetChild(i);
+            for (int i = 0; i < Points.Length; i++)
+            {
+                Points[i] = route1.transform.GetChild(i);
+            }
+            gameManager.loadingDone = true;
         }
-        gameManager.loadingDone = true;
+
+        if (enemyNumber == 2)
+        {
+            for (int i = 0; i < Points.Length; i++)
+            {
+                Points[i] = route2.transform.GetChild(i);
+            }
+            gameManager.loadingDone = true;
+        }
     }
 
     void Update()

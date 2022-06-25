@@ -6,6 +6,7 @@ using Photon.Pun;
 public class Player1Script : MonoBehaviour
 {
     public float speed;
+    public bool isDead = false;
 
     private bool zaklampGedimt = false;
     private bool enemyFound = false;
@@ -43,7 +44,7 @@ public class Player1Script : MonoBehaviour
         }
 
         //FlashLight
-        if (Input.GetKeyDown("f"))
+        if (Input.GetKeyDown("f") && isDead == false)
         {
             if (zaklampGedimt == false)
             {
@@ -72,6 +73,11 @@ public class Player1Script : MonoBehaviour
                 speed = 10;
                 break;
         }
+
+        if (isDead == true)
+        {
+            zaklamp.intensity = 5;
+        }
     }
 
     void FixedUpdate()
@@ -80,19 +86,19 @@ public class Player1Script : MonoBehaviour
         {
             if (Input.GetKey("w"))
             {
-                rb.AddForce(transform.forward * speed);
+                rb.AddForce(transform.forward * speed, ForceMode.Impulse);
             }
             if (Input.GetKey("d"))
             {
-                rb.AddForce(transform.right * speed);
+                rb.AddForce(transform.right * speed, ForceMode.Impulse);
             }
             if (Input.GetKey("s"))
             {
-                rb.AddForce((transform.forward * -1) * speed);
+                rb.AddForce((transform.forward * -1) * speed, ForceMode.Impulse);
             }
             if (Input.GetKey("a"))
             {
-                rb.AddForce((transform.right * -1) * speed);
+                rb.AddForce((transform.right * -1) * speed, ForceMode.Impulse);
             }
         }
     }
