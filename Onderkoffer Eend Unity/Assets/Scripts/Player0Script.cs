@@ -12,6 +12,7 @@ public class Player0Script : MonoBehaviour
     Camera cam;
     GameManager gameManager;
     Enemy enemy;
+    GameObject goToGen;
 
     void Start()
     {
@@ -20,9 +21,11 @@ public class Player0Script : MonoBehaviour
         cam = transform.GetChild(0).GetComponent<Camera>();
         gameManager = FindObjectOfType<GameManager>();
         enemy = FindObjectOfType<Enemy>();
+        goToGen = FindObjectOfType<FindGoToGen>().gameObject;
 
         if (view.IsMine)
         {
+            goToGen.SetActive(false);
             cam.targetDisplay = 0;
         }
     }

@@ -18,6 +18,8 @@ public class Player1Script : MonoBehaviour
     private Enemy enemy;
     private GameManager gameManager;
     private TerrainDetector terrainDetector;
+    private GameObject goToGen;
+    private HealCollider healCollider;
 
     void Start()
     {
@@ -27,56 +29,74 @@ public class Player1Script : MonoBehaviour
         zaklamp = gameObject.transform.GetChild(2).GetComponent<Light>();
         gameManager = FindObjectOfType<GameManager>();
         terrainDetector = new TerrainDetector();
+        goToGen = FindObjectOfType<FindGoToGen>().gameObject;
+        healCollider = FindObjectOfType<HealCollider>();
 
         if (view.IsMine)
         {
+            goToGen.SetActive(false);
             cam.targetDisplay = 0;
         }
     }
 
     private void Update()
     {
-        //Find Enemy
-        if (gameManager.loadingDone == true && enemyFound == false)
+        if (view.IsMine)
         {
-            enemy = FindObjectOfType<Enemy>();
-            enemyFound = true;
-        }
-
-        //FlashLight
-        if (Input.GetKeyDown("f") && isDead == false)
-        {
-            if (zaklampGedimt == false)
+            //Find Enemy
+            if (gameManager.loadingDone == true && enemyFound == false)
             {
-                zaklamp.intensity = 10;
-                enemy.player1ViewDistance = 30;
-                zaklampGedimt = true;
+                enemy = FindObjectOfType<Enemy>();
+                enemyFound = true;
             }
-            else
+
+            //FlashLight
+            if (Input.GetKeyDown("f") && isDead == false)
             {
+                if (zaklampGedimt == false)
+                {
+                    zaklamp.intensity = 10;
+                    enemy.player1ViewDistance = 30;
+                    zaklampGedimt = true;
+                }
+                else
+                {
+                    zaklamp.intensity = 40;
+                    enemy.player1ViewDistance = 50;
+                    zaklampGedimt = false;
+                }
+            }
+
+            //Terrain
+            int terrain = terrainDetector.GetTerrainTexture(transform.position);
+
+            switch (terrain)
+            {
+                case 0: //Gravel
+                    speed = 15;
+                    break;
+
+                case 1: //Grass
+                    speed = 10;
+                    break;
+            }
+
+            if (healCollider.player1Colliding == true)
+            {
+                isDead = false;
                 zaklamp.intensity = 40;
-                enemy.player1ViewDistance = 50;
-                zaklampGedimt = false;
             }
-        }
 
-        //Terrain
-        int terrain = terrainDetector.GetTerrainTexture(transform.position);
+            if (isDead == true)
+            {
+                zaklamp.intensity = 5;
+                goToGen.SetActive(true);
+            }
 
-        switch (terrain)
-        {
-            case 0: //Gravel
-                speed = 15;
-                break;
-
-            case 1: //Grass
-                speed = 10;
-                break;
-        }
-
-        if (isDead == true)
-        {
-            zaklamp.intensity = 5;
+            if (isDead == false)
+            {
+                goToGen.SetActive(false);
+            }
         }
     }
 

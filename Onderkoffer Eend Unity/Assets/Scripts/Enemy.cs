@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
     GameObject closestPlayer;
     GameObject player1;
     GameObject player2;
+    Player1Script player1Script;
+    Player2Script player2Script;
     float DistancePlayer1;
     float DistancePlayer2;
     float closestPlayerDistance;
@@ -37,6 +39,8 @@ public class Enemy : MonoBehaviour
         Agent = GetComponent<NavMeshAgent>();
         player1 = FindObjectOfType<Player1Script>().gameObject;
         player2 = FindObjectOfType<Player2Script>().gameObject;
+        player1Script = FindObjectOfType<Player1Script>();
+        player2Script = FindObjectOfType<Player2Script>();
         route1 = FindObjectOfType<FindRoute1>();
         route2 = FindObjectOfType<FindRoute2>();
         gameManager = FindObjectOfType<GameManager>();
@@ -80,6 +84,16 @@ public class Enemy : MonoBehaviour
         //Update PlayerLocations
         DistancePlayer1 = Vector3.Distance(transform.position, player1.transform.position);
         DistancePlayer2 = Vector3.Distance(transform.position, player2.transform.position);
+
+        if (player1Script.isDead == true)
+        {
+            DistancePlayer1 = 1000;
+        }
+
+        if (player2Script.isDead == true)
+        {
+            DistancePlayer2 = 1000;
+        }
 
         if (DistancePlayer1 < DistancePlayer2)
         {
@@ -136,6 +150,16 @@ public class Enemy : MonoBehaviour
 
     void Kill()
     {
-        closestPlayer.transform.position = new Vector3(2, 0, 2);
+        if (closestPlayer == player1)
+        {
+            Player1Script player1Script = player1.GetComponent<Player1Script>();
+            player1Script.isDead = true;
+        }
+
+        if (closestPlayer == player2)
+        {
+            Player2Script player2Script = player2.GetComponent<Player2Script>();
+            player2Script.isDead = true;
+        }
     }
 }
