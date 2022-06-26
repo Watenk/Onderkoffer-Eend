@@ -122,4 +122,9 @@ public class Player1Script : MonoBehaviour
             }
         }
     }
+
+    [PunRPC]
+    void ButtonEnabled()
+    {
+    }
 }

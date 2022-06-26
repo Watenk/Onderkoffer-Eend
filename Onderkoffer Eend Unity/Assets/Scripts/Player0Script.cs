@@ -71,4 +71,9 @@ public class Player0Script : MonoBehaviour
             }
         }
     }
+
+    [PunRPC]
+    void ButtonEnabled()
+    {
+    }
 }

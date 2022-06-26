@@ -2,16 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public bool[] playerSpawned = new bool[3];
     public int localPlayerNumber;
 
+    public int ButtonsLeft = 5;
     public GameObject loadingScreen;
     public GameObject spawnEnemys;
     public GameObject cabinController;
+    public GameObject gate;
+    public float lightTimerAmount = 500;
+    public float lightTimer;
+    private int lightTimerInt;
 
+    private FindButtonsLeftCounter findButtonsLeftCounter;
+    private TextMeshProUGUI buttonsCounter;
+    public TextMeshProUGUI lightTimerUI;
     private SpawnPlayers spawnPlayers;
 
     private bool allPlayersSpawned = false;
@@ -20,6 +29,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         spawnPlayers = FindObjectOfType<SpawnPlayers>();
+        findButtonsLeftCounter = FindObjectOfType<FindButtonsLeftCounter>();
+        buttonsCounter = findButtonsLeftCounter.GetComponent<TextMeshProUGUI>();
+        lightTimer = lightTimerAmount;
     }
 
     private void Update()
@@ -43,5 +55,19 @@ public class GameManager : MonoBehaviour
         {
             loadingScreen.SetActive(false);
         }
+
+        buttonsCounter.text = ButtonsLeft.ToString();
+
+        if (ButtonsLeft <= 0)
+        {
+            gate.SetActive(false);
+        }
+
+        if (lightTimer >= 0)
+        {
+            lightTimer -= Time.deltaTime;
+        }
+        lightTimerInt = (int) lightTimer;
+        lightTimerUI.text = lightTimerInt.ToString();
     }
 }
