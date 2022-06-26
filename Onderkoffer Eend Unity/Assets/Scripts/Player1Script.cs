@@ -10,6 +10,7 @@ public class Player1Script : MonoBehaviour
 
     private bool zaklampGedimt = false;
     private bool enemyFound = false;
+    public int lastPressedKey = 1;
 
     private Rigidbody rb;
     private PhotonView view;
@@ -20,17 +21,21 @@ public class Player1Script : MonoBehaviour
     private TerrainDetector terrainDetector;
     private GameObject goToGen;
     private HealCollider healCollider;
+    private Animator animator;
+    private AudioSource loopSound;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         view = GetComponent<PhotonView>();
         cam = transform.GetChild(0).GetComponent<Camera>();
-        zaklamp = gameObject.transform.GetChild(2).GetComponent<Light>();
+        zaklamp = gameObject.transform.GetChild(1).GetComponent<Light>();
         gameManager = FindObjectOfType<GameManager>();
         terrainDetector = new TerrainDetector();
         goToGen = FindObjectOfType<FindGoToGen>().gameObject;
         healCollider = FindObjectOfType<HealCollider>();
+        animator = FindObjectOfType<Animator>();
+        loopSound = FindObjectOfType<AudioSource>();
 
         if (view.IsMine)
         {
@@ -97,6 +102,61 @@ public class Player1Script : MonoBehaviour
             {
                 goToGen.SetActive(false);
             }
+
+            //Animator
+            animator.SetInteger("LastPressedKey", lastPressedKey);
+
+            if (Input.GetKey("w"))
+            {
+                animator.SetBool("w", true);
+                if (!loopSound.isPlaying)
+                {
+                    loopSound.Play();
+                }
+            }
+            else
+            {
+                animator.SetBool("w", false);
+            }
+
+            if (Input.GetKey("d"))
+            {
+                animator.SetBool("d", true);
+                if (!loopSound.isPlaying)
+                {
+                    loopSound.Play();
+                }
+            }
+            else
+            {
+                animator.SetBool("d", false);
+            }
+
+            if (Input.GetKey("s"))
+            {
+                animator.SetBool("s", true);
+                if (!loopSound.isPlaying)
+                {
+                    loopSound.Play();
+                }
+            }
+            else
+            {
+                animator.SetBool("s", false);
+            }
+
+            if (Input.GetKey("a"))
+            {
+                animator.SetBool("a", true);
+                if (!loopSound.isPlaying)
+                {
+                    loopSound.Play();
+                }
+            }
+            else
+            {
+                animator.SetBool("a", false);
+            }
         }
     }
 
@@ -107,6 +167,7 @@ public class Player1Script : MonoBehaviour
             if (Input.GetKey("w"))
             {
                 rb.AddForce(transform.forward * speed, ForceMode.Impulse);
+                lastPressedKey = 1;
             }
             if (Input.GetKey("d"))
             {
@@ -115,6 +176,7 @@ public class Player1Script : MonoBehaviour
             if (Input.GetKey("s"))
             {
                 rb.AddForce((transform.forward * -1) * speed, ForceMode.Impulse);
+                lastPressedKey = 2;
             }
             if (Input.GetKey("a"))
             {

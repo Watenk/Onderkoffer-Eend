@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 using Photon.Pun;
 
 public class Enemy : MonoBehaviour
@@ -23,6 +24,10 @@ public class Enemy : MonoBehaviour
     private FindRoute1 route1;
     private FindRoute2 route2;
     private GameManager gameManager;
+    private Animator animator;
+
+    private AudioSource grom;
+    private bool gromPlayed = false;
 
     //Players
     GameObject closestPlayer;
@@ -44,6 +49,8 @@ public class Enemy : MonoBehaviour
         route1 = FindObjectOfType<FindRoute1>();
         route2 = FindObjectOfType<FindRoute2>();
         gameManager = FindObjectOfType<GameManager>();
+        grom = FindObjectOfType<AudioSource>();
+        animator = FindObjectOfType<Animator>();
 
         if (enemyNumber == 1)
         {
@@ -140,10 +147,17 @@ public class Enemy : MonoBehaviour
         }
 
         Agent.destination = Points[Point].position;
+        gromPlayed = false;
     }
 
     void Follow()
     {
+        if (!grom.isPlaying && gromPlayed == false)
+        {
+            grom.Play();
+            gromPlayed = true;
+        }
+
         //Follows player in viewdistance
         Agent.destination = closestPlayer.transform.position;
     }
