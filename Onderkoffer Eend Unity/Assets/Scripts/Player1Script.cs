@@ -32,7 +32,7 @@ public class Player1Script : MonoBehaviour
         zaklamp = gameObject.transform.GetChild(1).GetComponent<Light>();
         gameManager = FindObjectOfType<GameManager>();
         terrainDetector = new TerrainDetector();
-        goToGen = FindObjectOfType<FindGoToGen>().gameObject;
+        goToGen = GameObject.Find("GoToGen");
         healCollider = FindObjectOfType<HealCollider>();
         animator = FindObjectOfType<Animator>();
         loopSound = FindObjectOfType<AudioSource>();
@@ -86,10 +86,11 @@ public class Player1Script : MonoBehaviour
                     break;
             }
 
+            //Health
             if (healCollider.player1Colliding == true)
             {
-                isDead = false;
                 zaklamp.intensity = 40;
+                view.RPC("NotDeath1", RpcTarget.All);
             }
 
             if (isDead == true)
@@ -189,4 +190,16 @@ public class Player1Script : MonoBehaviour
     void ButtonEnabled()
     {
     }
+
+    [PunRPC]
+    void NotDeath1()
+    {
+        isDead = false;
+    }
+
+    [PunRPC]
+    void NotDeath()
+    {
+    }
+
 }

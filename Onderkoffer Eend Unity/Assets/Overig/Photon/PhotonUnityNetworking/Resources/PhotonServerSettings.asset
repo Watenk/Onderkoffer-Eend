@@ -56,6 +56,8 @@ MonoBehaviour:
   - playerSpawned
   - PlayerSpawned
   - ButtonEnabled
+  - NotDeath
+  - NotDeath1
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

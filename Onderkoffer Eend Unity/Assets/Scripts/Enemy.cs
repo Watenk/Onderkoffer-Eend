@@ -35,9 +35,9 @@ public class Enemy : MonoBehaviour
     GameObject player2;
     Player1Script player1Script;
     Player2Script player2Script;
-    float DistancePlayer1;
-    float DistancePlayer2;
-    float closestPlayerDistance;
+    public float DistancePlayer1;
+    public float DistancePlayer2;
+    public float closestPlayerDistance;
 
     void Start()
     {
@@ -92,15 +92,7 @@ public class Enemy : MonoBehaviour
         DistancePlayer1 = Vector3.Distance(transform.position, player1.transform.position);
         DistancePlayer2 = Vector3.Distance(transform.position, player2.transform.position);
 
-        if (player1Script.isDead == true)
-        {
-            DistancePlayer1 = 1000;
-        }
 
-        if (player2Script.isDead == true)
-        {
-            DistancePlayer2 = 1000;
-        }
 
         if (DistancePlayer1 < DistancePlayer2)
         {
@@ -110,6 +102,16 @@ public class Enemy : MonoBehaviour
         if (DistancePlayer2 < DistancePlayer1)
         {
             closestPlayer = player2;
+        }
+
+        if (player1Script.isDead == true)
+        {
+            closestPlayer = player2;
+        }
+
+        if (player2Script.isDead == true)
+        {
+            closestPlayer = player1;
         }
 
         closestPlayerDistance = Vector3.Distance(transform.position, closestPlayer.transform.position);
@@ -175,5 +177,15 @@ public class Enemy : MonoBehaviour
             Player2Script player2Script = player2.GetComponent<Player2Script>();
             player2Script.isDead = true;
         }
+    }
+
+    [PunRPC]
+    void NotDeath1()
+    {
+    }
+
+    [PunRPC]
+    void NotDeath()
+    {
     }
 }

@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
 
 public class Player0Script : MonoBehaviour
 {
     public float speed;
 
-    Rigidbody rb;
-    PhotonView view;
-    Camera cam;
-    GameManager gameManager;
-    Enemy enemy;
-    GameObject goToGen;
+    private Rigidbody rb;
+    private PhotonView view;
+    private Camera cam;
+    private GameManager gameManager;
+    private Enemy enemy;
+    private GameObject goToGen;
+
 
     void Start()
     {
@@ -21,7 +23,7 @@ public class Player0Script : MonoBehaviour
         cam = transform.GetChild(0).GetComponent<Camera>();
         gameManager = FindObjectOfType<GameManager>();
         enemy = FindObjectOfType<Enemy>();
-        goToGen = FindObjectOfType<FindGoToGen>().gameObject;
+        goToGen = GameObject.Find("GoToGen");
 
         if (view.IsMine)
         {

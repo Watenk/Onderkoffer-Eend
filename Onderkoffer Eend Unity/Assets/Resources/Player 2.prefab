@@ -35,8 +35,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6251993073790750628}
-  - {fileID: 3969263820420043976}
   - {fileID: 5165455612995349603}
+  - {fileID: 3969263820420043976}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -89,7 +89,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -8401557491923762781}
-  - {fileID: 8663964080134317492}
+  - {fileID: 6000485878467848137}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 3969263820420043976}
   - component: {fileID: 8642427329073058510}
   - component: {fileID: 821933645165881764}
-  - component: {fileID: 8663964080134317492}
+  - component: {fileID: 6000485878467848137}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -406,7 +406,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3228875948427739804}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!95 &8642427329073058510
 Animator:
@@ -480,7 +480,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8663964080134317492
+--- !u!114 &6000485878467848137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,7 +511,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: LastPressedKey
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 1
     LayerIndex: 0
 --- !u!1 &6461028668822536086
 GameObject:
@@ -543,7 +543,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3228875948427739804}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &3133080200887095713
 Light:

@@ -35,4 +35,14 @@ public class Button : MonoBehaviour
         gameManager.ButtonsLeft -= 1;
         gameObject.SetActive(false);
     }
+
+    [PunRPC]
+    void NotDeath()
+    {
+    }
+
+    [PunRPC]
+    void NotDeath1()
+    {
+    }
 }
