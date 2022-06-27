@@ -24,6 +24,8 @@ public class Player2Script : MonoBehaviour
     private Animator animator;
     private AudioSource loopSound;
 
+    private Vector3 respawn = new(415, 0, 255);
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -98,6 +100,8 @@ public class Player2Script : MonoBehaviour
             {
                 zaklamp.intensity = 0;
                 goToGen.SetActive(true);
+                transform.position = respawn;
+                isDead = false;
             }
 
             if (isDead == false)
