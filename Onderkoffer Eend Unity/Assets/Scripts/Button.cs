@@ -18,11 +18,13 @@ public class Button : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Button!!");
-        if (other.CompareTag("Player1") || other.CompareTag("Player2"))
+        if (buttonEnabled == false)
         {
-            Debug.Log("Button with player!!");
-            view.RPC("ButtonEnabled", RpcTarget.All);
+            if (other.CompareTag("Player1") || other.CompareTag("Player2"))
+            {
+                Debug.Log("Button with player!!");
+                view.RPC("ButtonEnabled", RpcTarget.All);
+            }
         }
     }
 
